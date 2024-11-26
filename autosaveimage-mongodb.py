@@ -11,7 +11,7 @@ import hashlib
 import pymongo
 import threading
 import logging
-from config import *
+from config-mongodb import *
 
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
