@@ -1,3 +1,13 @@
+# Chu Duy Anh - 2480101001
+# File chính để thu thập và lưu trữ ảnh từ camera vào MongoDB
+# Chức năng:
+# - Kết nối tới MongoDB server
+# - Tạo các thread riêng cho từng camera
+# - Thu thập ảnh từ các camera
+# - Chuyển đổi ảnh sang dạng binary và lưu vào MongoDB collection
+# - Ghi log theo dõi hoạt động hệ thống
+# - Tự động thực thi lại khi mất kết nối
+
 import requests
 import time
 from datetime import datetime
