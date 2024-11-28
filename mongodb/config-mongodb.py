@@ -1,3 +1,6 @@
+# Chu Duy Anh - 2480101001
+# File cấu hình cho hệ thống lưu trữ ảnh sử dụng MongoDB
+
 import pandas as pd
 import os
 
