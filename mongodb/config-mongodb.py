@@ -7,7 +7,7 @@ import os
 # Config MongoDB
 MONGODB_URI = "mongodb://km2401:km2401@tuanhoangdinh.ddns.net:27017/example_db"
 DATABASE_NAME = "example_db"
-COLLECTION_NAME = "images"
+COLLECTION_IMAGE_NAME = "images"
 
 # Get camera IDs from CSV file
 df = pd.read_csv('../Thong_tin_nguon_camera.csv')
