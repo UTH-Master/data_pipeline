@@ -4,9 +4,9 @@
 # - Kết nối tới MongoDB server
 # - Tạo các thread riêng cho từng camera
 # - Thu thập ảnh từ các camera
-# - Chuyển đổi ảnh sang dạng binary và lưu vào MongoDB collection
+# - Chuyển đổi ảnh sang dạng Base64 và lưu vào MongoDB collection
 # - Ghi log theo dõi hoạt động hệ thống
-# - Tự động thực thi lại khi mất kết nối
+# - Tự động xử lý lỗi và thử lại khi mất kết nối
 
 import requests
 import time
