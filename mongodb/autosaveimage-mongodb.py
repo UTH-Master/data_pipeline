@@ -64,8 +64,8 @@ def save_image_to_mongodb(cam_id, interval=CAPTURE_INTERVAL):
         try:
             client, db, collection = init_mongodb()
             
-            url = f"{IMAGE_URL_BASE}?id={cam_id}"
-            response = requests.get(url)
+            image_url = f"{IMAGE_URL_BASE}?id={cam_id}"
+            response = requests.get(image_url)
             
             if response.status_code == 200:
                 image = Image.open(io.BytesIO(response.content))
@@ -78,7 +78,7 @@ def save_image_to_mongodb(cam_id, interval=CAPTURE_INTERVAL):
                 image_document = {
                     'camera_id': cam_id,
                     'image_id': f"image_{timestamp_str}",
-                    'url': url,
+                    'url': image_url,
                     'type': 'camera',
                     'image_base64': image_base64,
                 }
