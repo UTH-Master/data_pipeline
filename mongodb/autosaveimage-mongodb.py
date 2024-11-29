@@ -50,7 +50,7 @@ def init_mongodb():
     try:
         client = MongoClient(MONGODB_URI)
         db = client[DATABASE_NAME]
-        collection = db[COLLECTION_NAME]
+        collection = db[COLLECTION_IMAGE_NAME]
         client.admin.command('ping')
         logger.info("Successfully connected to MongoDB!")
         return client, db, collection
