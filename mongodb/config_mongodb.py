@@ -23,8 +23,7 @@ YOUTUBE_STREAMS = {
     "stream1": "https://www.youtube.com/watch?v=b6fkug3AmH4",
     "stream2": "https://www.youtube.com/watch?v=cB9Fs9UmcRU",
     "stream3": "https://www.youtube.com/watch?v=Fu3nDsqC1J0",
-    "stream4": "https://www.youtube.com/watch?v=IXBTD4VgFF4",
-    "stream5": "https://www.youtube.com/watch?v=F06HWCf22-Q"
+    "stream4": "https://www.youtube.com/watch?v=IXBTD4VgFF4"
 }
 
 CAPTURE_STREAM_INTERVAL = 0.1  # seconds
