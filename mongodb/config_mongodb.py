@@ -5,7 +5,7 @@ import pandas as pd
 import os
 
 # MongoDB Configuration
-MONGODB_URI = "mongodb://km2401:km2401@tuanhoangdinh.ddns.net:27017/example_db"
+MONGODB_URI = "mongodb://km2401:km2401@khoahocmaytinh.ddns.net:27017/example_db"
 DATABASE_NAME = "example_db"
 COLLECTION_IMAGE_NAME = "images"
 COLLECTION_STREAM_NAME = "streams"
