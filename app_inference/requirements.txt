@@ -1,0 +1,10 @@
+pytube
+opencv-python
+matplotlib
+vidgear[all]
+yt-dlp
+youtube-dl
+pafy
+fastapi[all]
+torch 
+torchvision
