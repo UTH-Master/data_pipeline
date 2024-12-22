@@ -1,11 +1,14 @@
 #!/bin/bash
 
 # Define the folder to remove and the git repository
-FOLDER="ingest_data"
-REPO_URL="https://github.com/UTH-Master/data_pipeline.git"
-PYTHON_SCRIPT="autosaveytblivestream-mongodb.py" # The Python script you want to run
+PYTHON_SCRIPT="main.py" 
 
-cd /home/km2401
+if [ -d "$FOLDER" ]; then
+    echo "Removing the folder: $FOLDER"
+    rm -rf "/home/km2401/data_pipeline"
+fi
+
+git clone https://github.com/UTH-Master/data_pipeline.git
 
 # Step 1: Check for the virtual environment, create if it does not exist
 if [ ! -d "env" ]; then
@@ -17,21 +20,16 @@ fi
 echo "Activating the virtual environment..."
 source env/bin/activate
 
-# Step 3: Remove the folder if it exists
-if [ -d "$FOLDER" ]; then
-    echo "Removing the folder: $FOLDER"
-    rm -rf "$FOLDER"
-fi
+cd "/home/km2401/data_pipeline"
+# # Step 4: Clone the git repository
+git clone https://github.com/ultralytics/yolov5
+pip install -r "yolov5/requirements.txt"
 
-# Step 4: Clone the git repository
-echo "Cloning the repository..."
-git clone $REPO_URL $FOLDER
-
+cd /home/km2401/data_pipeline/app_inference
 # Step 5: Install dependencies from requirements.txt
 echo "Installing dependencies..."
-pip3 install -r "$FOLDER/requirements.txt"
+pip3 install -r "requirements.txt"
 
-cd "$FOLDER/mongodb"
 # Step 6: Run the Python script
 echo "Running the Python script..."
 python3 "$PYTHON_SCRIPT"
