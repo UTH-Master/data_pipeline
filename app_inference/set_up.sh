@@ -3,12 +3,12 @@
 # Define the folder to remove and the git repository
 PYTHON_SCRIPT="main.py" 
 
-if [ -d "$FOLDER" ]; then
-    echo "Removing the folder: $FOLDER"
-    rm -rf "/home/km2401/data_pipeline"
-fi
+# if [ -d "$FOLDER" ]; then
+#     echo "Removing the folder: $FOLDER"
+#     rm -rf "/home/km2401/data_pipeline"
+# fi
 
-git clone https://github.com/UTH-Master/data_pipeline.git
+# git clone https://github.com/UTH-Master/data_pipeline.git
 
 # Step 1: Check for the virtual environment, create if it does not exist
 if [ ! -d "env" ]; then
