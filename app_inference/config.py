@@ -7,13 +7,14 @@ OPTIONS = {
 }
 LINE_POSITION = (300, 450, 900, 450) 
 
-VEHICLE_COUNTS = {
-    "car": 0,
-    "motorcycle": 0,
-    "bicycle": 0,
-    "bus": 0,
-    "truck": 0
-
-}
-
 LIST_VEHICLE = ["car", "motorcycle", "bicycle",  "bus", "truck"]
+
+SIGNAL_STOP = False
+
+DB_CONFIG = {
+    'dbname': 'traffic_db',
+    'user': 'postgres',
+    'password': 'adminadmin123',
+    'host': '42.119.182.248', 
+    'port': '5432',      
+}
