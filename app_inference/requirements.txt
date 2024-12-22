@@ -1,0 +1,14 @@
+pytube
+opencv-python
+matplotlib
+vidgear[all]
+yt-dlp
+youtube-dl
+pafy
+fastapi[all]
+torch 
+torchvision
+psycopg2-binary
+filterpy==1.4.5
+scikit-image==0.17.2
+lap==0.4.0
