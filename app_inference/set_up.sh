@@ -11,6 +11,8 @@ PYTHON_SCRIPT="main.py"
 # git clone https://github.com/UTH-Master/data_pipeline.git
 
 # Step 1: Check for the virtual environment, create if it does not exist
+
+cd /home/km2401
 if [ ! -d "env" ]; then
     echo "Creating Python3 virtual environment..."
     python3 -m venv env
@@ -20,10 +22,10 @@ fi
 echo "Activating the virtual environment..."
 source env/bin/activate
 
-cd "/home/km2401/data_pipeline"
+cd /home/km2401/data_pipeline
 # # Step 4: Clone the git repository
 git clone https://github.com/ultralytics/yolov5
-pip install -r "yolov5/requirements.txt"
+pip install -r yolov5/requirements.txt
 
 cd /home/km2401/data_pipeline/app_inference
 # Step 5: Install dependencies from requirements.txt
