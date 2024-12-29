@@ -9,7 +9,7 @@ from typing import List, Optional
 from datetime import datetime
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
-from mongodb.config_mongodb import *
+from config_mongodb import *
 
 # Models
 class ImageResponse(BaseModel):
