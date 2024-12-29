@@ -39,7 +39,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Camera Stream API",
     description="API để đọc dữ liệu livestream và image từ MongoDB",
-    version="1.0.0",
+    version="1.0.1",
     lifespan=lifespan
 )
 
@@ -116,15 +116,60 @@ async def get_streams(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/streams/{frame_id}", response_model=StreamResponse)
-async def get_stream_frame(frame_id: str):
+@app.get("/streams/by-timestamp/", response_model=List[StreamResponse])
+async def get_streams_by_timestamp(
+    timestamp: str = Query(..., description="Timestamp format: YYYY-MM-DD (e.g. 2024-12-29)"),
+    stream_id: Optional[str] = None,
+    limit: int = Query(default=100, ge=1, le=1000)
+):
+    """
+    Lấy danh sách frames từ một ngày cụ thể
+    - timestamp: Ngày bắt đầu (format: YYYY-MM-DD)
+    - stream_id: ID của stream (optional)
+    - limit: Số lượng frame tối đa trả về
+    """
     try:
-        frame = app.database[COLLECTION_STREAM_NAME].find_one({"frame_id": frame_id})
-        if frame is None:
+        # Chuyển đổi timestamp string thành datetime object
+        try:
+            full_timestamp = f"{timestamp}T00:00:00.000000"
+            timestamp_dt = datetime.strptime(full_timestamp, "%Y-%m-%dT%H:%M:%S.%f")
+        except ValueError:
             raise HTTPException(
-                status_code=404, 
-                detail=f"Frame not found with frame_id: {frame_id}"
+                status_code=400,
+                detail="Invalid timestamp format. Use YYYY-MM-DD (e.g. 2024-11-29)"
             )
-        return frame
+
+        query = {
+            "type": "stream",
+            "timestamp": {"$gte": timestamp_dt}
+        }
+        
+        if stream_id:
+            query["stream_id"] = stream_id
+
+        streams = list(app.database[COLLECTION_STREAM_NAME]
+                      .find(query)
+                      .sort("timestamp", 1)
+                      .limit(limit))
+        
+        if not streams:
+            if stream_id:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"No frames found for stream_id: {stream_id} after {timestamp}"
+                )
+            else:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"No frames found after {timestamp}"
+                )
+
+        return streams
+
     except Exception as e:
+        if isinstance(e, HTTPException):
+            raise e
         raise HTTPException(status_code=500, detail=str(e))
+    
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8001)
