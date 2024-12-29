@@ -25,7 +25,7 @@ class StreamResponse(BaseModel):
     url: str
     type: str
     frame_base64: str
-    timestamp: datetime
+    timestamp: str
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -122,26 +122,20 @@ async def get_streams_by_timestamp(
     stream_id: Optional[str] = None,
     limit: int = Query(default=100, ge=1, le=1000)
 ):
-    """
-    Lấy danh sách frames từ một ngày cụ thể
-    - timestamp: Ngày bắt đầu (format: YYYY-MM-DD)
-    - stream_id: ID của stream (optional)
-    - limit: Số lượng frame tối đa trả về
-    """
     try:
-        # Chuyển đổi timestamp string thành datetime object
+        # Chuyển đổi timestamp string thành định dạng đầy đủ
         try:
             full_timestamp = f"{timestamp}T00:00:00.000000"
-            timestamp_dt = datetime.strptime(full_timestamp, "%Y-%m-%dT%H:%M:%S.%f")
         except ValueError:
             raise HTTPException(
                 status_code=400,
                 detail="Invalid timestamp format. Use YYYY-MM-DD (e.g. 2024-11-29)"
             )
 
+        # Query sử dụng string comparison
         query = {
             "type": "stream",
-            "timestamp": {"$gte": timestamp_dt}
+            "timestamp": {"$gte": full_timestamp}
         }
         
         if stream_id:
