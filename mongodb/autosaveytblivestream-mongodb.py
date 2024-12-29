@@ -91,7 +91,8 @@ def save_stream_to_mongodb(stream_id, youtube_url, interval=CAPTURE_STREAM_INTER
                 _, buffer = cv2.imencode('.jpg', frame)
                 frame_base64 = base64.b64encode(buffer).decode('utf-8')
                 
-                timestamp_str = datetime.now().strftime("%Y%m%d%H%M%S")
+                current_timestamp = datetime.now()
+                timestamp_str = current_timestamp.strftime("%Y%m%d%H%M%S")
                 
                 stream_document = {
                     'stream_id': stream_id,
@@ -99,6 +100,7 @@ def save_stream_to_mongodb(stream_id, youtube_url, interval=CAPTURE_STREAM_INTER
                     'url': youtube_url,
                     'type': 'stream',
                     'frame_base64': frame_base64,
+                    'timestamp': current_timestamp
                 }
 
                 result = stream_collection.insert_one(stream_document)
